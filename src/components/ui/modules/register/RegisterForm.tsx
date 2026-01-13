@@ -57,7 +57,6 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
   },
 });
 
-
   const router = useRouter();
 
   // const onSubmit = async (data: z.infer<typeof registerFormSchema>) => {
@@ -84,6 +83,7 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
       console.log(result)
       if (result.success) {
         toast.success(result.message)
+        router.push('/login')
       }
       else {
         toast.error(result.message)

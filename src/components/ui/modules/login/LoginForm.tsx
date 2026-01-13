@@ -14,9 +14,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "../../button";
+import { loginUser } from "@/services/auth/loginUser";
+import { toast } from "sonner";
 
 const loginFormSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -32,16 +33,16 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
       password: "",
     },
   });
-  const router = useRouter();
+
   const onSubmit = async (data: z.infer<typeof loginFormSchema>) => {
-    // const res = await loginUser(data);
-    // console.log(res, "login response");
-    // if (res.success) {
-    //   toast.success("Login successful!");
-    //   router.push("/dashboard");
-    // } else {
-    //   toast.error(res.message || "Login failed!");
-    // }
+    const res = await loginUser(data);
+    console.log(res, "login response");
+    if (res.success) {
+      toast.success("Login successful!");
+      
+    } else {
+      toast.error(res.message || "Login failed!");
+    }
 
     console.log(data)
 
